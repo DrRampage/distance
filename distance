@@ -1,0 +1,18 @@
+import math
+
+def distance_between_two_points(lat1, lon1, lat2, lon2):
+    # Convert decimal degrees to radians
+    lat1, lon1, lat2, lon2 = map(math.radians, [lat1, lon1, lat2, lon2])
+
+    # Haversine formula
+    dlat = lat2 - lat1
+    dlon = lon2 - lon1
+    a = math.sin(dlat / 2) ** 2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon / 2) ** 2
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+    distance = 6371 * c  # Radius of the Earth in kilometers
+
+    return distance
+
+# Example usage
+distance = distance_between_two_points(38.5072, -121.4928, 19.4326, 40.3882)  # San Francisco to Shanghai
+print(f"The distance between San Francisco and Shanghai is approximately {distance:.2f} kilometers.")
